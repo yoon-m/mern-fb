@@ -52,3 +52,9 @@ export const logoutUser = () => dispatch => {
     setAuthToken(false);
     dispatch(setCurrentUser({}));
 };
+
+export const loggedIn = () => {
+    return {
+        loggedIn: localStorage.getItem("jwtToken") === undefined
+    };
+};

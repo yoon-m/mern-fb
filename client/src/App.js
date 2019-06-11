@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
 import { Switch, HashRouter, Route } from 'react-router-dom';
-
 import { Provider } from 'react-redux';
 import store from './store/store';
 
-import Login from './components/auth/Login';
+import loginContainer from './components/auth/loginContainer';
+import Home from './components/layout/Home';
 
 class App extends React.Component {
   render() {
@@ -13,7 +13,8 @@ class App extends React.Component {
       <Provider store={store} >
         <HashRouter>
           <Switch>
-            <Route path='/login' component={Login} />
+            <Route path='/login' component={loginContainer} />
+            <Route exact path='/' component={Home} />
           </Switch>
         </HashRouter>
       </Provider>
