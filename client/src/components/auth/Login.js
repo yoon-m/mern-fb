@@ -5,6 +5,7 @@ class Login extends React.Component {
     constructor(props) {
         super(props);
         this.date = new Date();
+        this.dateStr = this.date.toISOString();
 
         this.state = {
             loginEmail: '',
@@ -14,9 +15,9 @@ class Login extends React.Component {
             signupFName: '',
             signupLName: '',
             signupBDay: {
-                month: this.date.getMonth(),
-                day: this.date.getDay(),
-                year: this.date.getFullYear() - 25
+                month: this.dateStr.slice(5, 7),
+                day: this.dateStr.slice(8, 10),
+                year: '' + (this.date.getFullYear() - 25)
             }
         };
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -24,6 +25,18 @@ class Login extends React.Component {
     
     handleChange(field) {
         return e => this.setState({ [field]: e.currentTarget.value });
+    }
+
+    handleBirthday(e) {
+        this.setState({
+            signupBday: {
+                month: e.currentTarget.value.slice(5, 7),
+                day: e.currentTarget.value.slice(8, 10),
+                year: e.currentTarget.value.slice(0, 4)
+            }
+        });
+
+        debugger
     }
 
     handleSubmit(e) {
@@ -76,7 +89,12 @@ class Login extends React.Component {
                         <input type='text' placeholder='Last name' value={this.state.signupLName} onChange={this.handleChange('signupLName')} />
                         <input type='email' placeholder='Email' value={this.state.signupEmail} onChange={this.handleChange('signupEmail')} />
                         <input type='password' placeholder='New password' value={this.state.signupPassword} onChange={this.handleChange('signupPassword')} />
-                        <input type='date' value={`${this.state.signupBDay.year}-${this.state.signupBDay.month}-${this.state.signupBDay.day}`} min='1905-01-01' max={`${this.date.getFullYear()}-${this.state.signupBDay.month}-${this.state.signupBDay.day}`} />
+                        <input type='date' 
+                            value={`${this.state.signupBDay.year}-${this.state.signupBDay.month}-${this.state.signupBDay.day}`} 
+                            min='1905-01-01' 
+                            max={`${this.date.getFullYear()}-${this.state.signupBDay.month}-${this.state.signupBDay.day}`} 
+                            onChange={e => this.handleBirthday(e)}
+                            />
                         <input type='submit' value='Sign Up'/>
                     </form>
                 </section>
