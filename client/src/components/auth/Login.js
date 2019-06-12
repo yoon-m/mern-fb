@@ -76,9 +76,7 @@ class Login extends React.Component {
                         <input type='text' placeholder='Last name' value={this.state.signupLName} onChange={this.handleChange('signupLName')} />
                         <input type='email' placeholder='Email' value={this.state.signupEmail} onChange={this.handleChange('signupEmail')} />
                         <input type='password' placeholder='New password' value={this.state.signupPassword} onChange={this.handleChange('signupPassword')} />
-                        <select>
-                            <option value='1905'>1905</option>
-                        </select>
+                        <input type='date' value={`${this.state.signupBDay.year}-${this.state.signupBDay.month}-${this.state.signupBDay.day}`} min='1905-01-01' max={`${this.date.getFullYear()}-${this.state.signupBDay.month}-${this.state.signupBDay.day}`} />
                         <input type='submit' value='Sign Up'/>
                     </form>
                 </section>
